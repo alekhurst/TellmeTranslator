@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+
+<script>
+  /* initialize document level vars */
+  var me = "Alek Hurst";
+</script>
+
+<form id="intro">
+     <block>
+        <goto next="#choose_language" />
+     </block>
+</form>
+
+<menu id="language">
+    <prompt>
+      Welcome to the tellme translator. Do you want to translate to spanish or french?
+    </prompt>
+    <choice next="#translate_to_spanish">spanish</choice>
+    <choice next="#translate_to_french">french</choice>
+    <catch event="nomatch noinput help">
+      <goto next="#translate_to_other"/>
+    </catch>
+</menu>
+
+<form id="translate_to_spanish">
+  <block>
+     Ok, tell me something and I'll translate it to Spanish.
+  </block>
+</form>
+
+<form id="translate_to_french">
+  <record name="translation_input">
+    <prompt>
+       Ok, tell me something and I'll translate it to French. When you're done press pound.
+    </prompt>
+    <filled>
+       <goto expr="#begin_translation" />
+    </filled>  
+  </record>
+</form>
+
+<form id="begin_translation">
+  <block>
+    Looks like you said <value expr="translation_input" />
+  </block>
+</form>
+
+</vxml>
